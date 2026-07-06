@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spark — idea to priced plan you can send</title>
+  <meta name="description" content="Spark turns a freelancer's rough idea into a structured, priced, dependency-aware plan — and a client-ready proposal. AI-assisted or hold the pen yourself." />
+  <!-- Social preview (shows a proper card when the link is shared) -->
+  <meta property="og:title" content="Spark — idea to priced plan you can send" />
+  <meta property="og:description" content="Turn a rough idea into a structured, priced plan with a map that thinks — and a client-ready proposal. Try the live example, no signup." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Spark — idea to priced plan you can send" />
+  <meta name="twitter:description" content="Turn a rough idea into a structured, priced plan with a map that thinks — and a client-ready proposal." />
+  <script>
+    /* Apply saved/system theme before first paint to avoid a flash. */
+    try {
+      var _t = localStorage.getItem('spark.theme') ||
+        ((window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark');
+      if (_t === 'light') document.documentElement.setAttribute('data-theme', 'light');
+    } catch (e) {}
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-tile"><svg width="20" height="20" viewBox="0 0 24 24"><path d="M13.5 2L6 13.2h4.4L10.2 22l7.8-11.6h-4.6z" fill="currentColor"/></svg></span>
+      <span class="brand-text">
+        <span class="brand-name">Spark</span>
+        <span class="brand-sub">brainstorm canvas</span>
+      </span>
+    </div>
+    <div class="topbar-actions">
+      <button id="aboutBtn" class="ghost-btn" title="About Spark — what it does &amp; what's coming" aria-label="About Spark">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg>
+        <span class="about-btn-label">About</span>
+      </button>
+      <div class="projects-menu">
+        <button id="projectsBtn" class="ghost-btn" aria-haspopup="true" aria-expanded="false">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+          <span>Projects</span>
+          <span class="caret">▾</span>
+        </button>
+        <div id="projectsDropdown" class="dropdown" hidden>
+          <button id="newProjectBtn" class="dropdown-new">+ New project</button>
+          <input id="projectSearch" class="dropdown-search" type="text" placeholder="Search projects…" spellcheck="false" autocomplete="off" hidden />
+          <ul id="projectList" class="dropdown-list"></ul>
+          <p id="projectsEmpty" class="dropdown-empty">No saved projects yet.</p>
+        </div>
+      </div>
+      <button id="themeBtn" class="ghost-btn" title="Toggle light / dark mode" aria-label="Toggle theme">
+        <svg class="theme-icon theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+        <svg class="theme-icon theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <button id="settingsBtn" class="ghost-btn" title="API key settings" aria-label="Settings">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="canvas">
+    <!-- CHAT (left) -->
+    <section class="pane chat-pane">
+      <div class="chat-thread" id="chatThread"></div>
+      <form class="composer" id="composer">
+        <div class="tone-row">
+          <span class="tone-label">Tone</span>
+          <input id="toneSlider" class="tone-slider" type="range" min="0" max="4" step="1" value="2" aria-label="Output tone, from creative to executive" />
+          <span id="toneValue" class="tone-value">Balanced</span>
+          <button id="applyToneBtn" class="tone-apply" type="button" hidden>Apply</button>
+        </div>
+        <div class="suggestions" id="suggestions"></div>
+        <textarea
+          id="ideaInput"
+          class="composer-input"
+          placeholder="Describe your project idea — a rough thought is fine…"
+          spellcheck="false"
+          rows="2"></textarea>
+        <div class="composer-row">
+          <div class="composer-tools">
+            <button id="newComposerBtn" class="icon-btn" type="button" title="New project" aria-label="New project">＋</button>
+            <label class="clarify-toggle" id="clarifyLabel" title="Ask a few questions before building"><input type="checkbox" id="clarifyToggle"> Clarify first</label>
+          </div>
+          <div class="composer-send">
+            <button id="micBtn" class="icon-btn mic-btn" type="button" title="Dictate (voice input)" aria-label="Dictate"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4"/></svg></button>
+            <button id="sparkBtn" class="spark-btn" type="submit">
+              <span class="spark-btn-icon"><svg width="13" height="13" viewBox="0 0 24 24"><path d="M13.5 2L6 13.2h4.4L10.2 22l7.8-11.6h-4.6z" fill="currentColor"/></svg></span>
+              <span class="spark-btn-label">Spark it</span>
+            </button>
+            <button id="structureBtn" class="ghost-btn structure-btn" type="button" hidden title="Organize what you wrote — nothing invented, gaps become questions">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h10M4 18h7"/></svg>
+              Structure my draft
+            </button>
+          </div>
+        </div>
+      </form>
+    </section>
+
+    <!-- OUTPUT -->
+    <section class="pane output-pane">
+      <!-- Empty state -->
+      <div id="emptyState" class="state empty-state">
+        <div class="empty-glyph"><svg width="34" height="34" viewBox="0 0 24 24"><path d="M13.5 2L6 13.2h4.4L10.2 22l7.8-11.6h-4.6z" fill="currentColor"/></svg></div>
+        <p class="empty-title">A rough idea becomes a plan you can send</p>
+        <p class="empty-text">Describe it and hit <strong>Spark it</strong> — Spark structures the work, prices it against your rate, maps how it all connects, and exports a <strong>client-ready proposal</strong>. Or hold the pen yourself.</p>
+        <div class="empty-actions">
+          <button id="exampleBtn" class="spark-btn small">See a live example</button>
+          <button id="scratchBtn" class="ghost-btn">Start from scratch</button>
+        </div>
+        <p class="empty-key-hint">AI features use your own Anthropic key — free to get, stored only on your device. The example needs no key.</p>
+      </div>
+
+      <!-- Loading state -->
+      <div id="loadingState" class="state loading-state" hidden>
+        <div class="thinking">
+          <span class="thinking-spark"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M13.5 2L6 13.2h4.4L10.2 22l7.8-11.6h-4.6z" fill="currentColor"/></svg></span>
+          <span class="thinking-label">Sparking your idea…<span class="thinking-sub">Structuring the brief, tasks, questions and risks</span></span>
+        </div>
+        <div class="skel skel-title"></div>
+        <div class="skel skel-line short"></div>
+        <div class="skel-stats">
+          <div class="skel skel-stat"></div>
+          <div class="skel skel-stat"></div>
+          <div class="skel skel-stat"></div>
+        </div>
+        <div class="skel-block">
+          <div class="skel skel-row"></div>
+          <div class="skel skel-row"></div>
+          <div class="skel skel-row"></div>
+          <div class="skel skel-row short"></div>
+        </div>
+      </div>
+
+      <!-- Error state -->
+      <div id="errorState" class="state error-state" hidden>
+        <div class="error-glyph"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17v.5"/></svg></div>
+        <p class="error-title">That spark didn't catch</p>
+        <p id="errorText" class="error-text"></p>
+        <div class="error-actions">
+          <button id="errorSettingsBtn" class="ghost-btn">Open Settings</button>
+          <button id="retryBtn" class="spark-btn small">⟳ Retry</button>
+        </div>
+      </div>
+
+      <!-- Result -->
+      <article id="result" class="result" hidden></article>
+    </section>
+  </main>
+
+  <!-- Settings modal -->
+  <div id="settingsModal" class="modal-backdrop" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <h2 id="modalTitle" class="modal-title">Settings</h2>
+      <p class="modal-text">
+        Spark calls the Claude API directly from your browser, so it uses <strong>your own</strong> key.
+        It's stored only in this browser (<code>localStorage</code>) — it never leaves your machine except in calls to Anthropic.
+        A key is <strong>free to create</strong>, and a typical spark costs <strong>well under a cent</strong>.
+      </p>
+      <input id="apiKeyInput" class="key-input" type="password" placeholder="sk-ant-…" spellcheck="false" autocomplete="off" />
+      <p class="modal-note">No key yet? Get one in a minute at <a href="https://console.anthropic.com/settings/keys" target="_blank" rel="noopener">console.anthropic.com</a> — or close this and hit <strong>See a live example</strong> to try Spark with no key.</p>
+
+      <div class="modal-field">
+        <label class="modal-label" for="rateInput">Your hourly rate <span class="modal-opt">— optional, powers instant quotes</span></label>
+        <div class="rate-row">
+          <input id="currencyInput" class="currency-input" type="text" value="$" maxlength="3" aria-label="Currency" />
+          <input id="rateInput" class="rate-input" type="number" min="0" step="5" placeholder="e.g. 50" />
+          <span class="rate-suffix">/ hour</span>
+        </div>
+      </div>
+
+      <div class="modal-field">
+        <label class="modal-label" for="modelSelect">Model</label>
+        <select id="modelSelect" class="model-select">
+          <option value="claude-sonnet-4-6">Claude Sonnet 4.6 — fast &amp; balanced</option>
+          <option value="claude-opus-4-8">Claude Opus 4.8 — most capable</option>
+        </select>
+      </div>
+
+      <div class="modal-field">
+        <label class="modal-label">Branding <span class="modal-opt">— shown on client proposals</span></label>
+        <input id="brandNameInput" class="key-input" type="text" placeholder="Your name or company" autocomplete="off" />
+        <div class="brand-contact-grid">
+          <input id="brandEmailInput" class="key-input" type="email" placeholder="Email" autocomplete="off" />
+          <input id="brandPhoneInput" class="key-input" type="tel" placeholder="Phone" autocomplete="off" />
+          <input id="brandWebsiteInput" class="key-input" type="text" placeholder="Website" autocomplete="off" />
+        </div>
+        <div class="brand-logo-row">
+          <div class="brand-logo-preview" id="brandLogoPreview" data-empty="true">Logo</div>
+          <div class="brand-logo-controls">
+            <input id="brandLogoInput" type="file" accept="image/png,image/jpeg,image/svg+xml,image/webp" hidden />
+            <button type="button" id="brandLogoBtn" class="ghost-btn small">Upload logo</button>
+            <button type="button" id="brandLogoClear" class="ghost-btn small" hidden>Remove</button>
+          </div>
+        </div>
+        <div class="brand-accent-row">
+          <label for="brandAccentInput">Accent colour</label>
+          <input id="brandAccentInput" type="color" value="#2f945a" />
+        </div>
+      </div>
+
+      <div class="modal-field">
+        <label class="modal-label">What Spark learned <span class="modal-opt">— calibrates every new plan</span></label>
+        <ul id="learnList" class="learn-list"></ul>
+        <button type="button" id="learnResetBtn" class="ghost-btn small" hidden>Reset what Spark learned</button>
+      </div>
+
+      <div class="modal-actions">
+        <button id="clearKeyBtn" class="ghost-btn">Clear</button>
+        <div class="modal-actions-right">
+          <button id="cancelKeyBtn" class="ghost-btn">Cancel</button>
+          <button id="saveKeyBtn" class="spark-btn small">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- About Spark -->
+  <div id="aboutModal" class="modal-backdrop" hidden>
+    <div class="modal about-modal" role="dialog" aria-modal="true" aria-labelledby="aboutTitle">
+      <div class="about-head">
+        <span class="brand-tile"><svg width="20" height="20" viewBox="0 0 24 24"><path d="M13.5 2L6 13.2h4.4L10.2 22l7.8-11.6h-4.6z" fill="currentColor"/></svg></span>
+        <div>
+          <h2 id="aboutTitle" class="modal-title">Spark</h2>
+          <p class="about-tagline">A rough idea becomes a plan you can send.</p>
+        </div>
+      </div>
+
+      <div class="about-scroll">
+        <section class="about-section">
+          <h3 class="about-h">What Spark does</h3>
+          <p class="about-lead">Describe a project in a sentence and Spark turns it into everything you need to plan it and pitch it:</p>
+          <ul class="about-list">
+            <li><span class="ab-dot task"></span><strong>Structures the work</strong> — a name, brief, task list with time estimates, the open questions, and the real risks.</li>
+            <li><span class="ab-dot money"></span><strong>Prices it</strong> — your estimates × your rate = a live quote with a best–worst range.</li>
+            <li><span class="ab-dot question"></span><strong>Maps how it connects</strong> — a brain map that shows dependencies, the critical path, and bottlenecks.</li>
+            <li><span class="ab-dot risk"></span><strong>Hands you a client-ready proposal</strong> — a polished PDF (three looks, three formats) you can send today.</li>
+          </ul>
+          <p class="about-lead">…and you can hold the pen at any point — start from a blank canvas, have Spark organize your own draft, or let it write the first version.</p>
+        </section>
+
+        <section class="about-section">
+          <h3 class="about-h">The best parts</h3>
+          <ul class="about-list tight">
+            <li><strong>A map that thinks</strong> — not just boxes. Draw dependencies and it finds the critical path, the bottleneck, what can run in parallel, and answers graph questions with AI.</li>
+            <li><strong>You stay in control</strong> — human, AI, or any mix. Spark assists; it never hijacks your plan.</li>
+            <li><strong>It learns your estimating</strong> — notices when you run longer or shorter than its guesses and calibrates future plans to you.</li>
+            <li><strong>Spark lenses</strong> — instant angles on any project: Pitch, Budget, Lean MVP, Pre-mortem.</li>
+            <li><strong>Private by design</strong> — everything stays in your browser; you bring your own AI key.</li>
+          </ul>
+        </section>
+
+        <section class="about-section">
+          <h3 class="about-h">Coming next <span class="about-soon">planned</span></h3>
+          <ul class="about-list tight">
+            <li><strong>Accounts &amp; hosted keys</strong> — sign up and it just works, no key to paste.</li>
+            <li><strong>Real-time coworking</strong> — plan together with your team: presence, comments, live edits.</li>
+            <li><strong>Post-project learning</strong> — a quick debrief (planned vs. actual) that sharpens your estimates and risk-spotting over time.</li>
+            <li><strong>More handoff</strong> — editable Word/DOCX export, and pushing tasks to Notion / Trello / Linear.</li>
+          </ul>
+          <p class="about-note">Directions, not promises — shaped by what early users like you tell us.</p>
+        </section>
+      </div>
+
+      <div class="modal-actions about-actions">
+        <button id="aboutFeedbackBtn" class="ghost-btn" type="button">Send feedback</button>
+        <button id="aboutClose" class="spark-btn small" type="button">Got it</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Feedback (early-test channel). Change FEEDBACK_EMAIL in app.js to route it elsewhere. -->
+  <button id="feedbackLink" class="feedback-link" type="button" title="Tell us what you think">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5H4l1.8-2.7A8.5 8.5 0 1 1 21 11.5z"/></svg>
+    <span>Feedback</span>
+  </button>
+
+  <!-- Feedback form -->
+  <div id="feedbackModal" class="modal-backdrop" hidden>
+    <div class="modal feedback-modal" role="dialog" aria-modal="true" aria-labelledby="fbTitle">
+      <h2 id="fbTitle" class="modal-title">How's Spark?</h2>
+      <p class="modal-text">You're one of the first to try it — a line or two genuinely shapes what gets built next.</p>
+      <div class="fb-sentiments" id="fbSentiments">
+        <button type="button" class="fb-sentiment" data-sentiment="Love it">Love it</button>
+        <button type="button" class="fb-sentiment" data-sentiment="It's OK">It's OK</button>
+        <button type="button" class="fb-sentiment" data-sentiment="Not for me">Not for me</button>
+      </div>
+      <textarea id="fbText" class="fb-text" rows="4" placeholder="What worked, what was confusing, what's missing?" spellcheck="false"></textarea>
+      <p class="modal-note" id="fbFallback" hidden></p>
+      <div class="modal-actions">
+        <button id="fbCancel" class="ghost-btn" type="button">Cancel</button>
+        <button id="fbSend" class="spark-btn small" type="button">Send feedback</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="storage.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
